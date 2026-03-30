@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import {
   AdoptionPacingVisual,
   AdoptionSCurve,
 } from "@/components/visualizations/AdoptionSCurve";
 import { modelBySlug } from "@/lib/models";
+import { modelPageMetadata } from "@/lib/share-metadata";
 
 const entry = modelBySlug("adoption-s-curve")!;
 
-export const metadata: Metadata = {
-  title: `${entry.title} · Product Thinking`,
-  description: entry.description,
-};
+export const metadata = modelPageMetadata(entry);
 
 export default function AdoptionCurvePage() {
   return (

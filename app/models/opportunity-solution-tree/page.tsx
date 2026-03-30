@@ -1,14 +1,11 @@
-import type { Metadata } from "next";
 import { ModelPlaceholder } from "@/components/ModelPlaceholder";
 import { modelBySlug } from "@/lib/models";
+import { modelPageMetadata } from "@/lib/share-metadata";
 
 const slug = "opportunity-solution-tree";
 const entry = modelBySlug(slug)!;
 
-export const metadata: Metadata = {
-  title: `${entry.title} · Product Thinking`,
-  description: entry.description,
-};
+export const metadata = modelPageMetadata(entry);
 
 export default function OpportunitySolutionTreePage() {
   return <ModelPlaceholder slug={slug} />;
