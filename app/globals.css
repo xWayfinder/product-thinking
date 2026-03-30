@@ -35,7 +35,7 @@ body {
 .page-shell {
   width: min(1100px, 92vw);
   margin: 0 auto;
-  padding: 5rem 0 4rem;
+  padding: 5rem 0 0;
 }
 
 .hero {
@@ -120,6 +120,46 @@ body {
 .card-link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+.site-footer {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--surface-border);
+}
+
+.site-footer-inner {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 1.5rem 0 4rem;
+}
+
+.site-footer-label {
+  font-size: 0.78rem;
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+}
+
+.social-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+.social-links a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .model-nav {

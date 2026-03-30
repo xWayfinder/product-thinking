@@ -6,11 +6,9 @@ export default function Home() {
     <main className="page-shell">
       <section className="hero">
         <p className="eyebrow">Product Thinking</p>
-        <h1>Turn abstract product strategy into visual, shareable thinking.</h1>
+        <h1>Product Principles & Mental Models</h1>
         <p className="hero-copy">
-          This static site is powered by Next.js and published on GitHub Pages.
-          Add diagrams, model walkthroughs, and narrative explanations as your
-          toolkit evolves.
+        A collection of helpful product principles and mental models to help you make better product decisions faster.
         </p>
       </section>
 

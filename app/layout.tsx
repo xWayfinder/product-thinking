@@ -54,7 +54,37 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <footer className="site-footer">
+          <div className="site-footer-inner">
+            <p className="site-footer-label">@xWayfinder</p>
+            <nav className="social-links" aria-label="Social">
+              <a
+                href="https://x.com/xWayfinder"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                X
+              </a>
+              <a
+                href="https://github.com/xWayfinder"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.youtube.com/@xWayfinder"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                YouTube
+              </a>
+            </nav>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }
