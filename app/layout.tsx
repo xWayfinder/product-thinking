@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1376,
         height: 768,
-        alt: "Product Thinking — visual mental models for product work",
+        alt: "Product Thinking — principles & mental models for product work",
       },
     ],
   },

@@ -8,7 +8,7 @@ The app sets **Open Graph** and **Twitter Card** metadata so pasted links can sh
 
 1. **Production URL** — Set `NEXT_PUBLIC_SITE_URL` to your deployed origin with **no trailing slash** (see [`.env.example`](.env.example)). GitHub Actions sets this automatically to `https://<repository_owner>.github.io/product-thinking` during deploy. Without it, builds still work locally, but share previews may point at `http://localhost:3000`, which crawlers cannot use.
 
-2. **Preview image** — [`public/og.png`](public/og.png) is referenced as `og:image`. Replace that file if you want different artwork (roughly 1200×630 works well; current asset is slightly larger).
+2. **Preview image** — Default [`public/og.png`](public/og.png). Model pages can use a dedicated asset (e.g. [`public/og-adoption-s-curve.png`](public/og-adoption-s-curve.png)) via `shareImage` in [`lib/models.ts`](lib/models.ts), plus a short **`shareDescription`** for the link blurb. Prefer `public/` assets for page-specific art (works cleanly with static export + `basePath`).
 
 3. **Validate after deploy** — Caches are aggressive; use official debuggers to refresh and inspect:
 
