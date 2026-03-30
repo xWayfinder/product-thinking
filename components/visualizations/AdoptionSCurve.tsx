@@ -155,6 +155,184 @@ export function AdoptionSCurve({
   );
 }
 
+const steepnessCompareAria =
+  "Two adoption curves with the same midpoint in time: one rises gradually with a long transition, the other rises sharply with a rapid adoption phase.";
+
+type AdoptionSteepnessCompareProps = {
+  width?: number;
+  height?: number;
+  className?: string;
+};
+
+/** Wider spread = more visible contrast between stretched vs sharp middles. */
+const kSlow = 0.09;
+const kFast = 0.82;
+
+/** Cool blue (slow) vs warm coral (fast) — distinct on dark bg; fast must not match `--accent` (#7db2ff). */
+const strokeFastContrast = "rgba(255, 155, 115, 0.98)";
+
+export function AdoptionSteepnessCompare({
+  width = 520,
+  height = 280,
+  className,
+}: AdoptionSteepnessCompareProps) {
+  const padL = 52;
+  const padR = 20;
+  const padT = 16;
+  const padB = 52;
+  const innerW = width - padL - padR;
+  const innerH = height - padT - padB;
+  const t0 = 25;
+  const tMin = 0;
+  const tMax = 70;
+
+  const xScale = (t: number) => padL + ((t - tMin) / (tMax - tMin)) * innerW;
+  const yScale = (y: number) => padT + innerH - (y / 100) * innerH;
+
+  const ptsSlow = samplePath(tMin, tMax, 80, (t) => logistic(t, t0, kSlow));
+  const ptsFast = samplePath(tMin, tMax, 80, (t) => logistic(t, t0, kFast));
+  const pathSlow = pathD(ptsSlow, xScale, yScale);
+  const pathFast = pathD(ptsFast, xScale, yScale);
+
+  const chartBottom = padT + innerH;
+  const legendY = chartBottom + 16;
+  const swatchW = 24;
+  const swatchGap = 8;
+  const betweenGroups = 28;
+  const estTextW = 92;
+  const legendTotalW =
+    swatchW + swatchGap + estTextW + betweenGroups + swatchW + swatchGap + estTextW;
+  const legendStartX = padL + (innerW - legendTotalW) / 2;
+  const fastLegendX =
+    legendStartX + swatchW + swatchGap + estTextW + betweenGroups;
+
+  return (
+    <figure className={className}>
+      <svg
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label={steepnessCompareAria}
+      >
+        <title>{steepnessCompareAria}</title>
+        <line
+          x1={padL}
+          y1={padT + innerH}
+          x2={padL + innerW}
+          y2={padT + innerH}
+          stroke="var(--surface-border)"
+          strokeWidth={1}
+        />
+        <line
+          x1={padL}
+          y1={padT}
+          x2={padL}
+          y2={padT + innerH}
+          stroke="var(--surface-border)"
+          strokeWidth={1}
+        />
+        {[0, 25, 50, 75, 100].map((tick) => (
+          <g key={tick}>
+            <line
+              x1={padL - 4}
+              y1={yScale(tick)}
+              x2={padL}
+              y2={yScale(tick)}
+              stroke="var(--surface-border)"
+              strokeWidth={1}
+            />
+            <text
+              x={padL - 8}
+              y={yScale(tick)}
+              dy="0.35em"
+              textAnchor="end"
+              fill="var(--text-muted)"
+              fontSize={11}
+              fontFamily="var(--font-geist-mono), monospace"
+            >
+              {tick}%
+            </text>
+          </g>
+        ))}
+        <path
+          d={pathSlow}
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d={pathFast}
+          fill="none"
+          stroke={strokeFastContrast}
+          strokeWidth={2.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <text
+          x={padL + innerW / 2}
+          y={height - 12}
+          textAnchor="middle"
+          fill="var(--text-muted)"
+          fontSize={12}
+        >
+          Time
+        </text>
+        <text
+          x={14}
+          y={padT + innerH / 2}
+          textAnchor="middle"
+          fill="var(--text-muted)"
+          fontSize={12}
+          transform={`rotate(-90 14 ${padT + innerH / 2})`}
+        >
+          Adoption
+        </text>
+        <line
+          x1={legendStartX}
+          y1={legendY}
+          x2={legendStartX + swatchW}
+          y2={legendY}
+          stroke="var(--accent)"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+        />
+        <text
+          x={legendStartX + swatchW + swatchGap}
+          y={legendY}
+          dy="0.35em"
+          fill="var(--text)"
+          fontSize={11}
+          fontFamily="var(--font-geist-mono), monospace"
+        >
+          Slower adoption
+        </text>
+        <line
+          x1={fastLegendX}
+          y1={legendY}
+          x2={fastLegendX + swatchW}
+          y2={legendY}
+          stroke={strokeFastContrast}
+          strokeWidth={2.5}
+          strokeLinecap="round"
+        />
+        <text
+          x={fastLegendX + swatchW + swatchGap}
+          y={legendY}
+          dy="0.35em"
+          fill="var(--text)"
+          fontSize={11}
+          fontFamily="var(--font-geist-mono), monospace"
+        >
+          Faster adoption
+        </text>
+      </svg>
+    </figure>
+  );
+}
+
 type AdoptionPacingVisualProps = {
   width?: number;
   rowHeight?: number;

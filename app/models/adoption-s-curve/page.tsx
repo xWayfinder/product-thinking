@@ -1,6 +1,7 @@
 import {
   AdoptionPacingVisual,
   AdoptionSCurve,
+  AdoptionSteepnessCompare,
 } from "@/components/visualizations/AdoptionSCurve";
 import { modelBySlug } from "@/lib/models";
 import { modelPageMetadata } from "@/lib/share-metadata";
@@ -43,6 +44,55 @@ export default function AdoptionCurvePage() {
           audience has adopted the change. Your exact curve depends on the product, but the
           shape is stubbornly common.
         </p>
+      </section>
+
+      <section
+        className="model-figure-block"
+        aria-labelledby="steepness-heading"
+      >
+        <h2 id="steepness-heading" className="model-section-title">
+          Long runway vs. rapid takeoff
+        </h2>
+        <p className="model-figure-lead">
+          The sigmoid shape is familiar, but the <em>steepness</em> of the middle varies.
+          Switching cost, distribution, regulation, and whether the behavior is optional all
+          stretch or compress how long the “climb” phase lasts. Below, both curves pass the
+          halfway mark at the same time; one transitions gently, the other moves fast.
+        </p>
+        <div className="model-chart-wrap">
+          <AdoptionSteepnessCompare className="model-figure" />
+        </div>
+        <p className="model-figure-caption">
+          Illustrative only—real adoption curves differ—but the pattern matters: a stretched
+          middle usually means more change management per week of calendar time; a sharp
+          middle means adoption events pile up quickly for customers and your team.
+        </p>
+        <p className="hero-copy">
+          Heuristics, not guarantees. Use them to anticipate pace and plan support, not to
+          label an industry as “always slow” or “always fast.”
+        </p>
+        <ul className="model-pattern-list">
+          <li>
+            <strong>Enterprise or regulated software</strong> — New workflows, security
+            review, procurement, and training often lengthen the middle: the same org adopts
+            in waves, not in one click.
+          </li>
+          <li>
+            <strong>Deep workflow change</strong> — Features that sit on critical paths
+            (billing, clinical, manufacturing) tend to spread slowly while people validate
+            edge cases; shallow or optional surfaces can move faster.
+          </li>
+          <li>
+            <strong>Seasonal or calendar-bound adoption</strong> — Education, fiscal-year
+            planning, or retail peaks can stretch the curve because usage only turns on when
+            the semester or budget cycle allows.
+          </li>
+          <li>
+            <strong>Low-friction consumer or mandated internal tools</strong> — Simple
+            toggles, viral loops where the network already exists, or IT-mandated rollouts can
+            produce a sharper middle: discovery and usage collapse into a shorter window.
+          </li>
+        </ul>
       </section>
 
       <section className="model-figure-block" aria-labelledby="pacing-heading">
