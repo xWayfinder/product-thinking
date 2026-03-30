@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className="page-shell">
       <section className="hero">
-        <p className="eyebrow">Product Thinking Visualizations</p>
+        <p className="eyebrow">Product Thinking</p>
         <h1>Turn abstract product strategy into visual, shareable thinking.</h1>
         <p className="hero-copy">
           This static site is powered by Next.js and published on GitHub Pages.
