@@ -1,25 +1,7 @@
-export default function Home() {
-  const models = [
-    {
-      title: "Opportunity Solution Tree",
-      description:
-        "Map outcomes to opportunities and experiments so your team can prioritize by impact.",
-      status: "Planned",
-    },
-    {
-      title: "North Star Breakdown",
-      description:
-        "Break your North Star metric into leading indicators and initiative bets.",
-      status: "In Progress",
-    },
-    {
-      title: "Risk Radar",
-      description:
-        "Track product, technical, and adoption risks with explicit mitigation actions.",
-      status: "Draft",
-    },
-  ];
+import Link from "next/link";
+import { modelHref, models } from "@/lib/models";
 
+export default function Home() {
   return (
     <main className="page-shell">
       <section className="hero">
@@ -34,13 +16,19 @@ export default function Home() {
 
       <section className="grid" aria-label="Visualization templates">
         {models.map((model) => (
-          <article className="card" key={model.title}>
-            <div className="card-header">
-              <h2>{model.title}</h2>
-              <span>{model.status}</span>
-            </div>
-            <p>{model.description}</p>
-          </article>
+          <Link
+            href={modelHref(model.slug)}
+            key={model.slug}
+            className="card card-link"
+          >
+            <article>
+              <div className="card-header">
+                <h2>{model.title}</h2>
+                <span>{model.status}</span>
+              </div>
+              <p>{model.description}</p>
+            </article>
+          </Link>
         ))}
       </section>
     </main>
